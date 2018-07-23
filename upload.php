@@ -1,4 +1,5 @@
 <?php
+session_start();
 /** проверяем был ли передан файл отпользователя */
 if (isset($_FILES['myimage'])){
     $myimg = $_FILES['myimage'];
@@ -15,3 +16,4 @@ if (isset($_FILES['myimage'])){
         $res = move_uploaded_file($myimg['tmp_name'], __DIR__ . '/images/' . $name);
         }
 }
+header('Location:http://php1.local/index.php');
