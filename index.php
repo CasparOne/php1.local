@@ -17,7 +17,7 @@ foreach ($records as $record) {
 </head>
 <body>
 <h3>Добавление новой записи</h3>
-<form action="/gustbook.php" method="post">
+<form action="/guestbook.php" method="post">
     <input type="text" name="newRecord"><br>
     <button type="submit">Добавить запись</button>
 </form>
