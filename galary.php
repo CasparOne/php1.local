@@ -1,4 +1,6 @@
 <?php
+/** Присваеваем значение, содержащее путь к директории с изображениями
+ * получаем массив, содержащий список всех изображений в директории*/
 $imgPath = __DIR__ . '/images';
 $imgList = array_diff(scandir($imgPath), ['..', '.']);
 ?>
@@ -13,7 +15,9 @@ $imgList = array_diff(scandir($imgPath), ['..', '.']);
 </head>
 <body>
 <h1>Галерея</h1>
-<?php foreach ($imgList as $key => $value) {
+<?php
+/** выводим все изображения, содержащиеся в директории */
+foreach ($imgList as $key => $value) {
     ?><a href="/image.php?id=<?echo $key; ?>"><img src="/images/<?php echo $value?>" height="180">
 <?php
 }
