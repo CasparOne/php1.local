@@ -19,28 +19,26 @@ $a = $_GET['oper'] ?? '';
 /** $result присваеваем ноль */
 $result = 0;
 /** блок вычислений */
-if ('' != $a) {
-    switch ($a) {
-        case 'minus':
-            $result = $x - $y;
-            break;
-        case 'plus':
-            $result = $x + $y;
-            break;
-        case 'div':
-            if (0 != $y) {
-                $result = $x / $y;
-            } else {
-                $result = 'Деление на ноль!';
-            }
-            break;
-        case 'mult':
-            $result = $x * $y;
-            break;
-        default:
-                $result = 'Выбранна не верная операция!';
-                break;
-    }
+switch ($a) {
+    case 'minus':
+        $result = $x - $y;
+        break;
+    case 'plus':
+        $result = $x + $y;
+        break;
+    case 'div':
+        if (0 != $y) {
+            $result = $x / $y;
+        } else {
+            $result = 'Деление на ноль!';
+        }
+        break;
+    case 'mult':
+        $result = $x * $y;
+        break;
+    default:
+        $result = 'Выбранна не верная операция!';
+        break;
 }
 ?>
 <!doctype html>
