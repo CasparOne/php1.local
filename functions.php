@@ -1,4 +1,5 @@
 <?php
+/** Функция получения списка пользователей из источника данных - файла */
 function getUsersList()
 {
     $dataSource = __DIR__ . '/data.txt';
@@ -11,7 +12,7 @@ function getUsersList()
     }
     return $authData;
 }
-
+/** Функция принимает имя пользователя и проверяет на существование этого пользователя */
 function existsUser($login) {
     if (isset(getUsersList()[$login])) {
         return true;
@@ -29,5 +30,7 @@ function checkPassword($login, $password){
 }
 
 function getCurrentUser() {
-    return $_SESSION['usrLogin'];
+    if (!empty($_SESSION)){
+        return $_SESSION['usrLogin'];
+    }
 }

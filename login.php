@@ -1,15 +1,20 @@
 <?php
+/** стартуем сессию
+ * ЕСЛИ пользователь авторизирован - перенаправляем на главную страницу
+ * ИНАЧЕ остаемся на странице авторизации*/
 session_start();
-$login = $_POST['login'] ?? '';
-$password = $_POST['password'] ?? '';
 include __DIR__ . '/functions.php';
-if (existsUser($login)) {
+$login = trim($_POST['login']);
+$password = trim($_POST['password']);
+if (!empty($_SESSION['usr'])) {
+    header('Location:http://php1.local/index.php');
+}
+if (existsUser($login)){
     if (checkPassword($login, $password)) {
         $_SESSION['usr'] = $login;
         header('Location:http://php1.local/index.php');
     }
 }
-
 ?>
 
 <!doctype html>

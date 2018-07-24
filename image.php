@@ -1,5 +1,11 @@
 <?php
+/** стартуем сессию
+ * работаем дальше ЕСЛИ пользователь авторизирован
+ * ИНАЧЕ на страницу авторизации*/
 session_start();
+if (empty($_SESSION['usr'])) {
+    header('Location:http://php1.local/login.php');
+}
 /** Присваеваем значение, содержащее путь к директории с изображениями
  * получаем массив, содержащий список всех изображений в директории*/
 $imgPath = __DIR__ . '/images';
@@ -14,6 +20,7 @@ if (isset($imgId) && key_exists($imgId, $imgList)) {
     die();
 }
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,7 +30,8 @@ if (isset($imgId) && key_exists($imgId, $imgList)) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<body><br>
+<a href="/index.php"><p>Назад </p></a>
 <img src="/images/<?php echo $img; ?>">
 </body>
 </html>

@@ -16,6 +16,7 @@ $imgList = array_diff(scandir($imgPath), ['..', '.']);
 <body>
 <h1>Галерея</h1>
 <?php
+
 /** выводим все изображения, содержащиеся в директории */
 foreach ($imgList as $key => $value) {
     ?><a href="/image.php?id=<?echo $key; ?>"><img src="/images/<?php echo $value?>" height="180"></a>

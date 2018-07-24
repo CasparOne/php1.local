@@ -1,5 +1,11 @@
 <?php
+/** стартуем сессию
+ * работаем дальше ЕСЛИ пользователь авторизирован
+ * ИНАЧЕ на страницу авторизации*/
 session_start();
+if (empty($_SESSION['usr'])) {
+    header('Location:http://php1.local/login.php');
+}
 /** проверяем был ли передан файл отпользователя */
 if (isset($_FILES['myimage'])){
     $myimg = $_FILES['myimage'];
@@ -13,7 +19,14 @@ if (isset($_FILES['myimage'])){
         1048576 >= $size &&
         ('image/jpeg' == $type ||
             'image/png' == $type)) {
-        $res = move_uploaded_file($myimg['tmp_name'], __DIR__ . '/images/' . $name);
+        move_uploaded_file($myimg['tmp_name'], __DIR__ . '/images/' . $name);
+        $log = date('Y-m-d^H:i:s') . '^' . $_SESSION['usr'] . '^' . $name;
+        $logFile = file(__DIR__ . '/upload.log', FILE_IGNORE_NEW_LINES);
+        $logFile[] = $log;
+        foreach ($logFile as $line) {
+            $record = implode("\n", $logFile);
         }
+        file_put_contents(__DIR__ . '/upload.log', $record);
+    }
 }
 header('Location:http://php1.local/index.php');
