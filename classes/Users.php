@@ -8,19 +8,18 @@ require __DIR__ . '/CurrUser.php';
 class Users
 {
     protected $credentials;
-/** Метод конструктор открывает, читает файл и сохраняет данные */
+
     public function __construct()
     {
-        $lines = file(__DIR__ . '/../data.txt', FILE_IGNORE_NEW_LINES);
+        $lines = file(__DIR__ . '/../data/users.txt', FILE_IGNORE_NEW_LINES);
         $this->credentials = [];
         foreach ($lines as $val) {
-            $arr = explode(';', $val);
-            $login = new UserLogin($arr[0]);
-            $password = new UserPass($arr[1]);
+            $login = new UserLogin(explode(':', trim($val))[0]);
+            $password = new UserPass(explode(':', trim($val))[1]);
             $this->credentials[$login->getLogin()] = $password->getPassword();
         }
     }
-/** Метод проверяет логин/пароль пользователя */
+
     public function checkPass(string $login, string $password)
     {
         if (!$this->isUserExists($login)) {
@@ -29,13 +28,17 @@ class Users
         return password_verify($password, $this->credentials[$login]);
     }
 
-    public function isUserExists(string $login)
+    public function isUserExists($login)
     {
-        return isset($this->credentials[$login]);
+        return key_exists($login, $this->credentials);
     }
 
     public function getCurrUser()
     {
-             return $_SESSION['usr'];
+        if (!isset($_SESSION['usr']) || $_SESSION['usr'] == '') {
+            return null;
+        } else {
+            return $_SESSION['usr'];
+        }
     }
 }

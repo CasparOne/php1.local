@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Класс UserPass. Метод getPassword() возвращает значение звойства usrPass, имеющий тип UserPass
+ * Класс UserLogin. Метод getLogin() возвращает значение звойства usrPass, имеющий тип UserPass
  */
 class UserPass
 {
     protected $usrPass;
 
-    public function __construct(string $password)
+    public function __construct(string $login)
     {
-        $this->usrPass = password_hash($password, PASSWORD_DEFAULT);
+        $this->usrPass = $login;
     }
 
     public function getPassword()
