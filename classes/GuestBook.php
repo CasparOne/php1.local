@@ -1,8 +1,7 @@
 <?php
-require __DIR__ . '/TextFile.php';
 require __DIR__ . '/GuestBookRecord.php';
 
-class GuestBook extends TextFile
+class GuestBook
 {
     protected $pathFile = __DIR__ . '/../data/gb.txt';
     protected $data = [];

@@ -1,27 +1,20 @@
 <?php
-require __DIR__ . '/classes/GuestBook.php';
+session_start();
+$pages = include __DIR__ . '/data/pages.php';
+$id = $_GET['id'];
 
-$gb = new GuestBook();
-foreach ($gb->getRecords() as $record) {?>
-    <hr>
-    <?php echo $record->getMessage(); ?>
-    <?php
+if ($id == $pages[0]) {
+    include __DIR__ . '/view/guestbook.php';
+} elseif ($id == $pages[1]) {
+    include __DIR__ . '/view/galary.php';
+} elseif ($id == $pages[2]) {
+    include __DIR__ . '/view/login.php';
+} elseif ($id == $pages[3]) {
+    include __DIR__ . '/view/news.php';
+} elseif ($id == $pages[4]) {
+    include __DIR__ . '/img.php';
+} else {
+    include __DIR__ . '/view/index.php';
 }
-?>
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<br><br>
-<form action="/scripts/append.php" method="post">
-    <textarea name="message" style="align-content: center" placeholder="Сюда пишем комент" rows="5" cols="40"></textarea><br>
-    <button type="submit">Отправить</button>
-</form>
-</body>
-</html>
+
+
