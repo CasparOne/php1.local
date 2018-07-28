@@ -11,7 +11,7 @@
 <h1>Гостевая книга</h1>
 <br><br>
 <?php
-foreach ($this->data['GuestBook'] as $record) { ?>
+foreach ( $gb as $record) { ?>
    <article><?php echo $record; ?></article>
        <?php
 }

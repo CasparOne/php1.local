@@ -2,13 +2,23 @@
 
 class GuestBookRecord
 {
+    /**
+     * @var string $message
+     */
     protected $message;
 
-    public function __construct($message)
+    /**
+     * GuestBookRecord constructor.
+     * @param string $message
+     */
+    public function __construct(string $message)
     {
         $this->message = $message;
     }
 
+    /**
+     * @return string
+     */
     public function getMessage()
     {
         return $this->message;

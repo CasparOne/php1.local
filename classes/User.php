@@ -1,11 +1,18 @@
 <?php
 
-
 class User
 {
+    /**
+     * @var string $login
+     * @var string $password
+     */
     protected $login;
     protected $password;
 
+    /**
+     * User constructor.
+     * @param $userData
+     */
     public function __construct($userData)
     {
         $userData = explode(':', $userData);

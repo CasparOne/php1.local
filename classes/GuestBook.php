@@ -6,6 +6,9 @@ class GuestBook
     protected $pathFile = __DIR__ . '/../data/gb.txt';
     protected $data = [];
 
+    /**
+     * GuestBook constructor.
+     */
     public function __construct()
     {
         if ( file_exists($this->pathFile) && is_readable($this->pathFile)) {
@@ -16,18 +19,28 @@ class GuestBook
         }
     }
 
+    /**
+     * @return array
+     */
     public function getRecords()
     {
         return $this->data;
     }
 
+    /**
+     * @param GuestBookRecord $record
+     * @return $this
+     */
     public function append(GuestBookRecord $record)
     {
         $this->data[] = $record;
         return $this;
     }
 
-   public function save()
+    /**
+     * @return bool
+     */
+    public function save()
    {
        $lines = [];
        foreach ($this->getRecords() as $record) {

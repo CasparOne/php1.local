@@ -1,29 +1,43 @@
 <?php
-/**
- * Класс загрузки файлов на сервер
- */
 class Uploader
 {
+    /**
+     * @var
+     */
     protected $formName;
-    /** Метод конструктор принимает в качестве аргумента имя поля формы для загрузки файлов */
+    protected $dstPath;
+    protected $file;
+
+    /**
+     * Uploader constructor.
+     * @param $upfile
+     */
     public function __construct($upfile)
     {
         $this->formName = $upfile;
+        $this->file = $_FILES[$upfile];
+        $this->dstPath = __DIR__ . '/../images/';
     }
-    /** Метод ЕСЛИ файл загружен на сервер, помещает его в папку images от корня сайта ИНАЧЕ
-     * возвращает false*/
+
+    /**
+     * @return bool
+     */
     public function upload()
     {
         if ($this->isUploaded()) {
-            move_uploaded_file($_FILES[$this->formName]['tmp_name'],
-                __DIR__ . '/../images/' . strtolower($_FILES[$this->formName]['name']));
+        move_uploaded_file($this->file['tmp_name'],
+            $this->dstPath . $this->file['name']);
+        return true;
         } else {
             return false;
         }
     }
-    /** Метод проверяет загружен файл или нет без ошибок*/
-    public function isUploaded()
+
+    /**
+     * @return bool
+     */
+    protected function isUploaded()
     {
-        return (is_uploaded_file($_FILES[$this->formName]['tmp_name']) && (0 == $_FILES[$this->formName]['error']));
+        return (is_uploaded_file($this->file['tmp_name']) && (0 == $this->file['error']));
     }
 }

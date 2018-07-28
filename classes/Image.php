@@ -2,6 +2,9 @@
 
 class Image
 {
+    /**
+     * @var string $img
+     */
     protected $img;
 
     /**

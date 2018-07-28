@@ -10,7 +10,7 @@
 <body>
 <h1>Галерея изображений</h1>
 <?php
-foreach ($this->data['Galary'] as $record) { ?>
+foreach ($galary as $record) { ?>
 <a href="/img.php?imgId=<?php echo $record->getImg(); ?>"><img src="/images/<?php echo $record->getImg(); ?>" height="160" ></a>
 <?php
 }
