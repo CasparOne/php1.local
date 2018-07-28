@@ -5,6 +5,10 @@ class News
 {
     protected $lisArticles = [];
     protected $path = __DIR__ . '/../data/news.txt';
+
+    /**
+     * News constructor.
+     */
     public function __construct()
     {
         $lines = file($this->path, FILE_IGNORE_NEW_LINES);
@@ -14,6 +18,9 @@ class News
         }
     }
 
+    /**
+     * @return array
+     */
     public function getNews()
     {
         return $this->lisArticles;

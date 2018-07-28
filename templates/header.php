@@ -16,7 +16,7 @@
             <li><a href="/index.php">Главная</a></li>
             <li><a href="/index.php?id=guestbook">Оставить отзыв</a></li>
             <li><a href="/index.php?id=galary">Галерея</a></li>
-            <li><a href="/index.php?id=news">Новости</li>
+            <li><a href="/index.php?id=news">Новости</a></li>
             <li><a href="/index.php?id=login">Логин</a></li>
         </ul>
     </div>

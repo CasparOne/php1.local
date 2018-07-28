@@ -8,12 +8,14 @@ class Users
      */
     protected $dbUsr = __DIR__ . '/../data/users.txt';
     protected $data = [];
+    protected $curUsr;
 
     /**
      * Users constructor.
      */
     public function __construct()
     {
+        $this->curUsr = $_SESSION['usr'] ?? '';
         $lines= file($this->dbUsr, FILE_IGNORE_NEW_LINES);
         foreach ($lines as $line) {
             $rawData = new User($line);
@@ -61,7 +63,7 @@ class Users
      */
     public function getCurUser()
     {
-        return $_SESSION['usr'];
+        return $this->curUsr;
     }
 
 }

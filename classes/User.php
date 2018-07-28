@@ -20,11 +20,17 @@ class User
         $this->password = password_hash($userData[1], PASSWORD_DEFAULT);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLogin()
     {
         return $this->login;
     }
 
+    /**
+     * @return bool|string
+     */
     public function  getPassword()
     {
         return $this->password;

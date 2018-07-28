@@ -15,7 +15,7 @@ foreach ($galary as $record) { ?>
 <?php
 }
 ?>
-<form action="/scripts/upload.php" method="post" enctype="multipart/form-data">
+<form action="/index.php?id=upl" method="post" enctype="multipart/form-data">
     <input type="file" name="myimage">
     <button type="submit">Загрузить</button>
     <br><br>

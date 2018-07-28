@@ -1,7 +1,4 @@
 <?php
-if (empty($_SESSION['usr']) && '' == $_SESSION['usr']) {
-    header('Location:/index.php?id=login');
-}
 require __DIR__ . '/../classes/Users.php';
 require __DIR__ . '/../classes/Images.php';
 require __DIR__ . '/../classes/View.php';

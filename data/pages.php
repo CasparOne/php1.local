@@ -4,5 +4,8 @@ return [
   'galary',
   'login',
   'news',
-  'img'
+  'img',
+  'article',
+  'upl',
+
 ];
