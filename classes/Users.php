@@ -59,11 +59,13 @@ class Users
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCurUser()
     {
-        return $this->curUsr;
+        if ($this->isUsrExists($this->curUsr)) {
+            return $this->curUsr;
+        }
     }
 
 }
