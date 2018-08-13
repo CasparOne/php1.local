@@ -1,29 +1,17 @@
 <?php
-/** стартуем сессию
- * работаем дальше ЕСЛИ пользователь авторизирован
- * ИНАЧЕ на страницу авторизации*/
-session_start();
-if (empty($_SESSION['usr'])) {
-    header('Location:http://php1.local/login.php');
-}
-
-/** Присваеваем значение, содержащее путь к директории с изображениями
- * получаем массив, содержащий список всех изображений в директории*/
 $imgPath = __DIR__ . '/images';
 $imgList = array_diff(scandir($imgPath), ['..', '.']);
 
-/** Присваеваем $imgId значение переданное от пользователя*/
-$imgId = $_GET['id'];
-
-/** Проверяем получили ли мы значение id и соответствует ли переданное значение одному из ключей
- * массива изображений  */
-if (isset($imgId) && key_exists($imgId, $imgList)) {
-    $img = $imgList[$imgId];
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $imgId = $_GET['id'];
 } else {
-    die();
+    header('Location:/galary.php');
+}
+
+if (isset($imgId) && in_array($imgId, $imgList)) {
+    $img = $imgId;
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,8 +21,7 @@ if (isset($imgId) && key_exists($imgId, $imgList)) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body><br>
-<a href="/index.php"><p>Назад </p></a>
+<body>
 <img src="/images/<?php echo $img; ?>">
 </body>
 </html>

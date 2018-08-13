@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (empty($_SESSION['usr'])) {
     header('Location:http://php1.local/login.php');
 }
