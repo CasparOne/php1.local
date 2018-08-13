@@ -1,5 +1,7 @@
 <?php
-/** Функция получения списка пользователей из источника данных - файла */
+/**
+ * @return array
+ */
 function getUsersList()
 {
     $dataSource = __DIR__ . '/data.txt';
@@ -7,12 +9,16 @@ function getUsersList()
     $arr = file($dataSource, FILE_IGNORE_NEW_LINES);
     foreach ($arr as $logPass) {
         $data = explode(':', $logPass);
-        $authData[$data[0]] = password_hash($data[1], PASSWORD_DEFAULT);
-
+        $authData[$data[0]] = $data[1];
     }
     return $authData;
 }
-/** Функция принимает имя пользователя и проверяет на существование этого пользователя */
+
+/**
+ * @param $login
+ * @return bool
+ *
+ */
 function existsUser($login) {
     if (isset(getUsersList()[$login])) {
         return true;
@@ -21,6 +27,11 @@ function existsUser($login) {
     }
 }
 
+/**
+ * @param $login
+ * @param $password
+ * @return bool
+ */
 function checkPassword($login, $password){
     if (password_verify($password, getUsersList()[$login])){
         return true;
@@ -29,6 +40,9 @@ function checkPassword($login, $password){
     }
 }
 
+/**
+ * @return mixed
+ */
 function getCurrentUser() {
     if (!empty($_SESSION)){
         return $_SESSION['usrLogin'];

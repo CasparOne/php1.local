@@ -1,8 +1,7 @@
 <?php
-/** Присваеваем значение, содержащее путь к директории с изображениями
- * получаем массив, содержащий список всех изображений в директории */
 $imgPath = __DIR__ . '/images';
 $imgList = array_diff(scandir($imgPath), ['..', '.']);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,15 +15,13 @@ $imgList = array_diff(scandir($imgPath), ['..', '.']);
 <body>
 <h1>Галерея</h1>
 <?php
-
-/** выводим все изображения, содержащиеся в директории */
-foreach ($imgList as $key => $value) {
-    ?><a href="/image.php?id=<?echo $key; ?>"><img src="/images/<?php echo $value?>" height="180"></a>
-<?php
+foreach ($imgList as $value) {
+    ?><a href="/image.php?id=<?echo $value; ?>"><img src="/images/<?php echo $value?>" height="180"></a>
+    <?php
 }
 ?><br><br>
 <h3>Загрузка изображений</h3>
-    <p>К загрузке принимаются файлы только JPG и PNG размером не более 1 Мб</p>
+<p>К загрузке принимаются файлы только JPG и PNG размером не более 1 Мб</p>
 <form action="/upload.php" method="post" enctype="multipart/form-data">
     <input type="file" name="myimage">
     <button type="submit">Загрузить</button><br><br>

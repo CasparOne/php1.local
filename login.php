@@ -1,7 +1,5 @@
 <?php
-/** стартуем сессию
- * ЕСЛИ пользователь авторизирован - перенаправляем на главную страницу
- * ИНАЧЕ остаемся на странице авторизации*/
+/* session start */
 session_start();
 include __DIR__ . '/functions.php';
 $login = trim($_POST['login']);
@@ -32,7 +30,7 @@ if (existsUser($login)){
         Login:<input name="login"><br><br>
         Password:<input name="password"><br><br>
         <button type="submit">Войти</button>
-</form>
+    </form>
 </div>
 </body>
 </html>
