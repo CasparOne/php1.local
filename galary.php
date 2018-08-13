@@ -21,6 +21,7 @@ foreach ($imgList as $value) {
     ?><a href="/image.php?id=<?echo $value; ?>"><img src="/images/<?php echo $value?>" height="180"></a>
 <?php
 }
+
 ?><br><br>
 <h3>Загрузка изображений</h3>
     <p>К загрузке принимаются файлы только JPG и PNG размером не более 1 Мб</p>

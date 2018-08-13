@@ -11,10 +11,7 @@ if (isset($_FILES['myimage']) && !empty($_FILES['myimage'])){
 
     /** Проверяем наличие ошибок, соответствие размеру файла. типу файла.
      * Переносим загруженный файл в нужное нам место*/
-    if (0 == $err &&
-        1048576 >= $size &&
-        ('image/jpeg' == $type ||
-            'image/png' == $type)) {
+    if (0 == $err && 1048576 >= $size &&('image/jpeg' == $type || 'image/png' == $type)) {
         $res = move_uploaded_file($myimg['tmp_name'], __DIR__ . '/images/' . $name);
         }
 }

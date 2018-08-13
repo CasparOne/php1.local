@@ -12,13 +12,7 @@ $newRecord = $_POST['newRecord'];
  * Записываем в файл
  * после окончания работы скрипта перенаправляем на главную*/
 if ('' != $newRecord) {
-
-$records[] = trim($newRecord);
-file_put_contents($dataFile,implode("\n", $records));
-    header('Location:/index.php');
-
-} else {
-
-    header('Location:/index.php');
-
+    $records[] = trim($newRecord);
+    file_put_contents($dataFile,implode("\n", $records));
 }
+header('Location:/index.php');
