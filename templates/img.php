@@ -8,9 +8,8 @@
     <title>Галерея - <?php echo $_GET['imgId'];?></title>
 </head>
 <body>
-<a href="/index.php?id=galary">
-    <h4><p><< BACK</p></h4>
-</a>
+<div style="align-content: center">
 <img src="/images/<?php echo $_GET['imgId']; ?>">
+</div>
 </body>
 </html>

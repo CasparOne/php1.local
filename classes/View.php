@@ -2,12 +2,8 @@
 
 class View
 {
+
     public $data = [];
-    protected $header;
-    public function __construct()
-    {
-        $this->header = __DIR__ . '/../templates/header.php';
-    }
 
     /**
      * @param string $name
@@ -42,9 +38,7 @@ class View
         foreach ($this->data as $name => $value) {
             $$name = $value;
          }
-        require $this->header;
         require $template;
     }
-
 
 }

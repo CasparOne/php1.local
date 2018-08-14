@@ -39,9 +39,9 @@ class Users
     {
         if (isset($this->data[$login])) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+
     }
 
     /**
@@ -53,9 +53,9 @@ class Users
     {
         if (password_verify($password, $this->data[$login])) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+
     }
 
     /**
@@ -66,6 +66,7 @@ class Users
         if ($this->isUsrExists($this->curUsr)) {
             return $this->curUsr;
         }
+        return false;
     }
 
 }
