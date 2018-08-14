@@ -1,24 +1,18 @@
 <?php
 
-/** Присваеваем значение, содержащее путь к директории с изображениями
- * получаем массив, содержащий список всех изображений в директории*/
 $imgPath = __DIR__ . '/images';
 $imgList = array_diff(scandir($imgPath), ['..', '.']);
 
-/** Присваеваем $imgId значение переданное от пользователя*/
+
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $imgId = $_GET['id'];
 } else {
     header('Location:/galary.php');
 }
 
-
-/** Проверяем получили ли мы значение id и соответствует ли переданное значение одному из ключей
- * массива изображений  */
 if (isset($imgId) && in_array($imgId, $imgList)) {
     $img = $imgId;
 }
-
 ?>
 <!doctype html>
 <html lang="en">

@@ -1,6 +1,8 @@
 <?php
 include __DIR__ . '/functions.php';
+
 $records = getRecord();
+
 foreach ($records as $record) {
     echo $record; ?><hr>
 <?php
