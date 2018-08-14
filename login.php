@@ -27,8 +27,8 @@ if (existsUser($login)){
 <body>
 <div align="center">
     <form action="login.php" method="post">
-        Login:<input name="login"><br><br>
-        Password:<input name="password"><br><br>
+        Login:<input type="text" name="login"><br><br>
+        Password:<input type="password" name="password"><br><br>
         <button type="submit">Войти</button>
     </form>
 </div>
