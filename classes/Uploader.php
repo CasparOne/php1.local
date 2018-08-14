@@ -28,7 +28,9 @@ class Uploader
      */
     public function upload()
     {
-        if ( $this->isUploaded() &&
+        if (isset($this->myimg['tmp_name']) && !empty($this->myimg['tmp_name']) &&
+            (0 == $this->myimg['error']) &&
+            $this->isUploaded() &&
             (
              'image/jpeg' === $this->myimg['type'] ||
              'image/gif' === $this->myimg['type'] ||
