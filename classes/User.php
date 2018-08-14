@@ -17,7 +17,7 @@ class User
     {
         $userData = explode(':', $userData);
         $this->login = $userData[0];
-        $this->password = password_hash($userData[1], PASSWORD_DEFAULT);
+        $this->password = $userData[1];
     }
 
     /**
