@@ -3,15 +3,16 @@ require __DIR__ . '/GuestBookRecord.php';
 
 class GuestBook
 {
-    protected $pathFile = __DIR__ . '/../data/gb.txt';
+    protected $pathFile;
     protected $data = [];
 
     /**
      * GuestBook constructor.
      */
-    public function __construct()
+    public function __construct($datafile)
     {
-        if ( file_exists($this->pathFile) && is_readable($this->pathFile)) {
+        if ( file_exists($datafile) && is_readable($datafile) && (0 !== filesize($datafile)) ) {
+            $this->pathFile = $datafile;
             $lines = file($this->pathFile, FILE_IGNORE_NEW_LINES);
             foreach ($lines as $line) {
                 $this->data[] = new GuestBookRecord($line);

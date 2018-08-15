@@ -5,10 +5,10 @@ class Article
     /**
      * @var
      */
-    protected $author;
+    protected $id;
     protected $title;
     protected $textNews;
-    protected $id;
+
 
     /**
      * Article constructor.
@@ -16,19 +16,15 @@ class Article
      */
     public function __construct($news)
     {
-        $row = explode('%', $news);
+        $row = explode('||', $news);
         $this->id = $row[0];
-        $this->author = $row[1];
-        $this->title = $row[2];
-        $this->textNews = $row[3];
+        $this->title = $row[1];
+        $this->textNews = $row[2];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
+    public function getId()
     {
-        return $this->author;
+        return $this->id;
     }
 
     /**

@@ -8,12 +8,12 @@
     <title>Новости</title>
 </head>
 <body>
+<h5><a href="/index.php">Главная</a></h5>
+<h2>Новости</h2>
 <?php
-foreach ($News as $news=>$article) { ?>
-<a href="/view/article.php?news=<?php echo $news?>"><h3><?php echo $article->getTitle(); ?></h3></a>
-    <p><span style="font-size: small">Автор: </span><?php echo $article->getAuthor(); ?></p>
+foreach ($news as $article) { ?>
+<a href="/article.php?id=<?php echo $article->getId()?>"><h3><?php echo $article->getTitle(); ?></h3></a>
     <p><?php echo substr($article->getTextNews(), 0, stripos($article->getTextNews(), '.')) . '...'; ?>
-    <span style="color: purple"><a href="/view/article.php?news=<?php echo $news?>">Подробнее</a></span></p>
 <?php
 }
 ?>

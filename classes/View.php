@@ -3,7 +3,7 @@
 class View
 {
 
-    public $data = [];
+   protected $data = [];
 
     /**
      * @param string $name

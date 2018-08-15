@@ -8,16 +8,17 @@
     <title>Гостевая книга</title>
 </head>
 <body>
-<h1>Гостевая книга</h1>
-<br><br>
+<h5><a href="/index.php">Главная</a></h5>
+<h2>Гостевая книга</h2>
+<br>
 <?php
-foreach ( $gb as $record) { ?>
+foreach ( $guestbook as $record) { ?>
    <article><?php echo $record; ?></article>
        <?php
 }
 ?>
-<form action="/scripts/append.php" method="post">
-    <textarea name="message" style="align-content: center" placeholder="Сюда пишем комент" rows="5" cols="40"></textarea><br>
+<form action="/append.php" method="post">
+    <textarea name="message"  placeholder="Сюда пишем комент" rows="10" cols="30"></textarea><br>
     <button type="submit">Отправить</button>
 </form>
 </body>

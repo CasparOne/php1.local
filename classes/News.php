@@ -3,18 +3,23 @@ require __DIR__ . '/Article.php';
 
 class News
 {
-    protected $lisArticles = [];
-    protected $path = __DIR__ . '/../data/news.txt';
+    protected $listArticles = [];
+    protected $path;
 
     /**
      * News constructor.
      */
-    public function __construct()
+    public function __construct($datafile)
     {
-        $lines = file($this->path, FILE_IGNORE_NEW_LINES);
-        foreach ($lines as $id => $line ) {
-            $article = new Article($line);
-            $this->lisArticles[$id] = $article;
+        if (file_exists($datafile) && is_readable($datafile) && (0 != filesize($datafile))) {
+            $this->path = $datafile;
+            $lines = file($this->path, FILE_IGNORE_NEW_LINES);
+            foreach ($lines as $line ) {
+                $article = new Article($line);
+                $this->listArticles[$article->getId()] = $article;
+            }
+         } else {
+            echo 'Ошибка создания объекта! Не возможно прочитать файл с данными';
         }
     }
 
@@ -23,7 +28,7 @@ class News
      */
     public function getNews()
     {
-        return $this->lisArticles;
+        return $this->listArticles;
     }
 
 }

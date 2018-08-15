@@ -1,33 +1,15 @@
-<?php
-session_start();
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PHP1-Введение в професию</title>
+</head>
+<body>
+<p><a href="/guestbook.php">Гостевая книга</a></p>
+<p><a href="/news.php">Новости</a> </p>
 
-$id = $_GET['id'] ?? '';
-if (!isset($_SESSION['usr']) && empty($_SESSION['usr'])) {
-    $id = 'login';
-}
-$pages = include __DIR__ . '/data/pages.php';
-
-
-if ($id == $pages[0]) {
-    include __DIR__ . '/templates/header.php';
-    include __DIR__ . '/view/guestbook.php';
-} elseif ($id == $pages[1]) {
-    include __DIR__ . '/templates/header.php';
-    include __DIR__ . '/view/galary.php';
-} elseif ($id == $pages[2]) {
-    include __DIR__ . '/view/login.php';
-} elseif ($id == $pages[3]) {
-    include __DIR__ . '/templates/header.php';
-    include __DIR__ . '/view/news.php';
-} elseif ($id == $pages[4]) {
-    include __DIR__ . '/templates/header.php';
-    include __DIR__ . '/img.php';
-} elseif ($id == $pages[5]) {
-    include __DIR__ . '/templates/header.php';
-    include __DIR__ . '/view/article.php';
-} elseif ($id == $pages[6]) {
-    include  __DIR__ . '/scripts/upload.php';
-} else {
-    include __DIR__ . '/templates/header.php';
-    include __DIR__ . '/view/index.php';
-}
+</body>
+</html>
