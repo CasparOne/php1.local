@@ -7,16 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?php
 
-        echo $article[$_GET['id']]->getTitle(); ?></title>
+        echo $article['title']; ?></title>
 </head>
 <body>
 <h5><a href="/index.php">Главная</a></h5>
 <h4><?php
-    echo $article[$_GET['id']]->getTitle();
+    echo $article['title'];
     ?></h4>
 <article><?php
-echo $article[$_GET['id']]->getTextNews();
+echo $article['text'];
 ?></article>
+<p><i>Автор: </i><b><?php echo $article['author']?></b></p>
 
 </body>
 </html>

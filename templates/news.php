@@ -12,8 +12,8 @@
 <h2>Новости</h2>
 <?php
 foreach ($news as $article) { ?>
-<a href="/article.php?id=<?php echo $article->getId()?>"><h3><?php echo $article->getTitle(); ?></h3></a>
-    <p><?php echo substr($article->getTextNews(), 0, stripos($article->getTextNews(), '.')) . '...'; ?>
+<a href="/article.php?id=<?php echo $article['id']; ?>"><h3><?php echo $article['title']; ?></h3></a>
+    <p><?php echo substr($article['text'], 0, stripos($article['text'], '.')) . '...'; ?>
 <?php
 }
 ?>

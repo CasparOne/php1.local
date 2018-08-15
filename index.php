@@ -1,15 +1,15 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PHP1-Введение в професию</title>
-</head>
-<body>
-<p><a href="/guestbook.php">Гостевая книга</a></p>
-<p><a href="/news.php">Новости</a> </p>
+<?php
+$file = __DIR__ . '/config.php';
+if (!file_exists($file) || !is_readable($file)) {
+    die('Не задан файл конфигурации');
+}
+$config = include $file;
+require __DIR__ . '/classes/Db.php';
+require __DIR__ . '/classes/View.php';
 
-</body>
-</html>
+$db = new Db($config);
+$view = new View();
+$sql = 'SELECT * FROM news ORDER BY id DESC ';
+
+$view->assign('news', $db->query($sql));
+echo $view->render(__DIR__ . '/templates/news.php');

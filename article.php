@@ -2,17 +2,26 @@
 if (isset($_GET['id']) && !empty($_GET['id']) ) {
     $id = (int)$_GET['id'];
 } else {
-    header('Location:/news.php');
+    header('Location:/');
+}
+$file = __DIR__ . '/config.php';
+
+if (file_exists($file) && is_readable($file)) {
+    $config = include $file;
+} else {
+    die('Не задан файл конфигурации');
 }
 
-require __DIR__ . '/classes/News.php';
 require __DIR__ . '/classes/View.php';
+require __DIR__ . '/classes/Db.php';
 
-$news = new News(__DIR__ . '/data/news.txt');
 $view = new View();
-if (!key_exists($id, $news->getNews())) {
-    header('Location:/news.php');
+$db = new Db($config);
+$selected = $db->query('SELECT * FROM news WHERE id=:id', [':id' => $id])[0];
+if (is_null($selected)) {
+    header('Location:/');
 }
-$view->assign('article', $news->getNews());
+
+$view->assign('article', $selected);
 echo $view->render(__DIR__ . '/templates/article.php');
 
