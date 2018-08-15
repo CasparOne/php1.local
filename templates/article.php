@@ -17,7 +17,7 @@
 <article><?php
 echo $article['text'];
 ?></article>
-<p><i>Автор: </i><b><?php echo $article['author']?></b></p>
+<p><i>Автор: </i><b><?php echo $article['author'] ?? 'Unknown'; ?></b></p>
 
 </body>
 </html>
