@@ -17,6 +17,8 @@ class GuestBook
             foreach ($lines as $line) {
                 $this->data[] = new GuestBookRecord($line);
             }
+        } else {
+            die('Ошибка создания объекта! Невозможно прочитать файл с данными!');
         }
     }
 
