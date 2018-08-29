@@ -1,17 +1,21 @@
 <?php
+session_start();
+if (empty($_SESSION['usr'])) {
+    header('Location:http://php1.local/login.php');
+}
+
 $imgPath = __DIR__ . '/images';
 $imgList = array_diff(scandir($imgPath), ['..', '.']);
 
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $imgId = $_GET['id'];
-} else {
-    header('Location:/galary.php');
-}
+$imgId = $_GET['id'];
 
-if (isset($imgId) && in_array($imgId, $imgList)) {
-    $img = $imgId;
+if (isset($imgId) && key_exists($imgId, $imgList)) {
+    $img = $imgList[$imgId];
+} else {
+    die();
 }
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,7 +25,8 @@ if (isset($imgId) && in_array($imgId, $imgList)) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<body><br>
+<a href="/index.php"><p>Назад </p></a>
 <img src="/images/<?php echo $img; ?>">
 </body>
 </html>

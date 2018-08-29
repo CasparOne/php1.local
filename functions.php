@@ -1,31 +1,23 @@
 <?php
-
 /**
- * @return array
+ * @return mixed
  */
 function getUsersList()
 {
-    $dataSource = __DIR__ . '/data.txt';
-    $authData = [];
-    $arr = file($dataSource, FILE_IGNORE_NEW_LINES);
-    foreach ($arr as $logPass) {
-        $data = explode(':', $logPass);
-        $authData[$data[0]] = $data[1];
-    }
-    return $authData;
+    $conf = include __DIR__ . '/data.php';
+    return $conf['credentials'];
 }
 
 /**
  * @param $login
  * @return bool
- *
  */
-function existsUser($login) {
-    if (isset(getUsersList()[$login])) {
-        return true;
-    } else {
+function existsUser($login) :bool
+{
+    if (false === getUsersList()) {
         return false;
     }
+    return key_exists($login, getUsersList());
 }
 
 /**
@@ -33,20 +25,20 @@ function existsUser($login) {
  * @param $password
  * @return bool
  */
-function checkPassword($login, $password){
-
-    if (password_verify($password, getUsersList()[$login])){
-        return true;
-    } else {
+function checkPassword($login, $password) :bool
+{
+    if (!existsUser($login)) {
         return false;
     }
+    return password_verify($password, getUsersList()[$login]);
 }
 
 /**
  * @return mixed
  */
-function getCurrentUser() {
-    if (!empty($_SESSION)){
-        return $_SESSION['usrLogin'];
+function getCurrentUser()
+{
+    if (!empty($_SESSION) && existsUser($_SESSION['usr'])) {
+        return $_SESSION['usr'];
     }
 }

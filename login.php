@@ -1,20 +1,19 @@
 <?php
+/** стартуем сессию
+ * ЕСЛИ пользователь авторизирован - перенаправляем на главную страницу
+ * ИНАЧЕ остаемся на странице авторизации*/
 session_start();
-
 include __DIR__ . '/functions.php';
 
-$login = trim($_POST['login']);
-$password = trim($_POST['password']);
-if (!empty($_SESSION['usr'])) {
-    header('Location:http://php1.local/index.php');
-}
-
-if (existsUser($login)){
-    if (checkPassword($login, $password)) {
-        $_SESSION['usr'] = $login;
-        header('Location:http://php1.local/index.php');
+if (isset($_POST['login']) && isset($_POST['password'])) {
+    if (checkPassword($_POST['login'], $_POST['password'])) {
+        $_SESSION['usr'] = $_POST['login'];
     }
 }
+
+if (null !== getCurrentUser()) {
+    header('Location:/index.php');
+} else {
 ?>
 
 <!doctype html>
@@ -28,7 +27,7 @@ if (existsUser($login)){
 </head>
 <body>
 <div align="center">
-    <form action="login.php" method="post">
+    <form action="/login.php" method="post">
         Login:<input name="login"><br><br>
         Password:<input name="password"><br><br>
         <button type="submit">Войти</button>
@@ -36,3 +35,5 @@ if (existsUser($login)){
 </div>
 </body>
 </html>
+<?php }
+?>
