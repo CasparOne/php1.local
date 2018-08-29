@@ -12,8 +12,11 @@ class TextFile
      */
     public function __construct($path)
     {
-        $this->pathFile = $path;
-        $this->records = file($this->pathFile,FILE_IGNORE_NEW_LINES);
+        if (file_exists($path) && is_readable($path)) {
+            $this->pathFile = $path;
+            $this->records = file($this->pathFile,FILE_IGNORE_NEW_LINES);
+        }
+
     }
 
     /**

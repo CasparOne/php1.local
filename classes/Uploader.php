@@ -3,68 +3,47 @@
 class Uploader
 {
     protected $formName;
-    protected $myimg;
 
-    /**
-     * Uploader constructor.
-     * @param $formName
-     */
     public function __construct($formName)
     {
         $this->formName = $formName;
-        $this->myimg = $_FILES[$this->formName];
+    }
+
+    public function isUploaded()
+    {
+        if (0 == $_FILES[$this->formName]['error']) {
+            return true;
+        }
+        return false;
+    }
+
+    public function upload()
+    {
+        if (true === $this->isUploaded()
+        && true === $this->validateFile()) {
+            move_uploaded_file(
+                $_FILES[$this->formName]['tmp_name'],
+                // добавил рандомную приставку для возможности загрузки файлов с одинаковым именем
+                __DIR__ . '/../images/' . rand(0, 999) . $_FILES[$this->formName]['name']);
+        }
     }
 
     /**
      * @return bool
+     * Добавил метод проверки на тип файла и размер. Параметры прописанны в файле, который фозвращает массив параметров
      */
-    public function isUploaded()
+    protected function validateFile ()
     {
-        if (isset($this->myimg['tmp_name']) && !empty($this->myimg['tmp_name']) &&
-            (0 == $this->myimg['error']) &&
-            is_uploaded_file($this->myimg['tmp_name']) &&
-            (
-                /* Можно реализовать с помощью защищенного свойства типа Array, но для наглядности сделал так*/
-                'image/jpeg' === $this->myimg['type'] ||
-                'image/gif' === $this->myimg['type'] ||
-                'image/gif' === $this->myimg['type'] ||
-                'image/png' === $this->myimg['type']
-            ) &&
-            1048576 >= $this->myimg['size '] ) {
-            return true;
-
-        } else {
-            return false;
-
-        }
-    }
-
-    /**
-     * Method uploads file on the server
-     */
-    public function upload()
-    {
-        if ( $this->isUploaded() ) {
-            move_uploaded_file($this->myimg['tmp_name'], __DIR__ . '/../images/' . $this->myimg['name']);
-
-            /* можно вынести данную проверку в отдельный метод. например, saveLog(). И вызывать этот метод после upload()
-            */
-            if (is_writable( __DIR__ . '/../upload.log')) {
-                $log = date('Y-m-d-H-i-s') . ':' . $_SESSION['usr'] . ':' . $this->myimg['name'];
-                $logFile = file(__DIR__ . '/../upload.log', FILE_IGNORE_NEW_LINES);
-                $logFile[] = $log;
-
-                foreach ($logFile as $line) {
-                    $record = implode("\n", $logFile);
-                }
-                file_put_contents(__DIR__ . '/../upload.log', $record);
+        if(file_exists(__DIR__ . '/../fileparams.php')) {
+            $paramsArray = include __DIR__ . '/../fileparams.php';
+            $filetypes = $paramsArray['filetypes'];
+            $filesize = $paramsArray['filesize'];
+            if (in_array($_FILES[$this->formName]['type'], $filetypes)
+                && $filesize >= $_FILES[$this->formName]['size']) {
+                return true;
             }
-
-            return true;
-        } else {
-
-            return false;
         }
+        return false;
     }
 
 }
