@@ -1,8 +1,7 @@
 <?php
-/** стартуем сессию
- * ЕСЛИ пользователь авторизирован - перенаправляем на главную страницу
- * ИНАЧЕ остаемся на странице авторизации*/
+
 session_start();
+
 include __DIR__ . '/functions.php';
 
 if (isset($_POST['login']) && isset($_POST['password'])) {
@@ -11,7 +10,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     }
 }
 
-if (null !== getCurrentUser()) {
+if (false !== getCurrentUser()) {
     header('Location:/index.php');
 } else {
 ?>
