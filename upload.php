@@ -4,6 +4,9 @@ if (isset($_FILES['myimage'])) {
     $uploader = new Uploader('myimage');
     $uploader->upload();
 }
+
+var_dump($_FILES);
+
 ?>
 
 <h1>Галерея</h1>
