@@ -41,4 +41,5 @@ function getCurrentUser()
     if (!empty($_SESSION) && existsUser($_SESSION['usr'])) {
         return $_SESSION['usr'];
     }
+    return false;
 }
